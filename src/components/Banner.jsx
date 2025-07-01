@@ -8,8 +8,8 @@ const Banner = () => {
     <Box
       sx={{
         width: "100%",
-        pt: 4,
-        pb: 10,
+        pt: { xs: 6, sm: 8, md: 10 },
+        pb: { xs: 10, md: 12 },
         background: `url(${cityRoad})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -34,18 +34,13 @@ const Banner = () => {
       />
 
       <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
-        <Box
-          sx={{
-            textAlign: "center",
-            color: "#2A1C4D",
-          }}
-        >
+        <Box sx={{ textAlign: "center", color: "#2A1C4D" }}>
           <Typography
             variant="h6"
             sx={{
-              fontSize: "18px",
+              fontSize: { xs: "16px", sm: "18px", md: "20px" },
               fontWeight: 500,
-              lineHeight: "110%",
+              lineHeight: "120%",
               letterSpacing: "0.72px",
             }}
           >
@@ -57,9 +52,8 @@ const Banner = () => {
               sx={{
                 fontFamily: "Inter",
                 fontWeight: 800,
-                fontSize: "18px",
-                lineHeight: "110%",
-                letterSpacing: "0.72px",
+                fontSize: { xs: "16px", sm: "18px", md: "20px" },
+                lineHeight: "120%",
               }}
             >
               THE TVS iQUBE
@@ -75,7 +69,7 @@ const Banner = () => {
               fontWeight: 600,
               px: 3,
               py: 1,
-              fontSize: "14px",
+              fontSize: { xs: "12px", sm: "13px", md: "14px" },
               textTransform: "uppercase",
               borderRadius: "6px",
               mt: 2,
@@ -85,17 +79,23 @@ const Banner = () => {
             JUST ₹3499 / MONTH!
           </Button>
         </Box>
+
         <Box
           component="img"
           src={tvsIqube}
           alt="TVS iQube Scooter"
           sx={{
-            maxHeight: "220px",
+            width: { xs: "80%", sm: "auto" },
+            maxWidth: { xs: "260px", sm: "300px", md: "350px" },
+            maxHeight: { xs: "160px", sm: "200px", md: "220px" },
             mt: 3,
-            mb: -10,
+            mb: { xs: -6, sm: -8, md: -10 },
+            mx: "auto",
+            display: "block",
           }}
         />
       </Container>
+
       <Box
         sx={{
           position: "absolute",

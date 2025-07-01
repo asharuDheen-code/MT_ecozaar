@@ -17,6 +17,7 @@ import {
   Button,
   Menu,
   MenuItem,
+  Collapse,
 } from "@mui/material";
 import {
   Search as SearchIcon,
@@ -26,6 +27,8 @@ import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
   Menu as MenuIcon,
   LocationOnOutlined as LocationOnOutlinedIcon,
+  ExpandLess,
+  ExpandMore,
 } from "@mui/icons-material";
 import logo from "../assets/images/logo.png";
 
@@ -34,6 +37,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [activeMenu, setActiveMenu] = useState(null);
   const [selectedNav, setSelectedNav] = useState(null);
+  const [drawerDropdown, setDrawerDropdown] = useState({});
 
   const handleMenuOpen = (event, menuType) => {
     setAnchorEl(event.currentTarget);
@@ -53,6 +57,13 @@ const Header = () => {
       return;
     }
     setDrawerOpen(open);
+  };
+
+  const handleDrawerDropdownToggle = (text) => {
+    setDrawerDropdown((prev) => ({
+      ...prev,
+      [text]: !prev[text],
+    }));
   };
 
   const navLinks = [
@@ -77,22 +88,59 @@ const Header = () => {
     <Box
       sx={{ width: 250 }}
       role="presentation"
-      onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
         {navLinks.map((link) => (
-          <ListItem key={link.text} disablePadding>
-            <ListItemButton onClick={() => setSelectedNav(link.text)}>
-              <ListItemText
-                primary={link.text}
-                primaryTypographyProps={{
-                  fontWeight: selectedNav === link.text ? "bold" : "normal",
-                  color: selectedNav === link.text ? "primary.main" : "inherit",
+          <Box key={link.text}>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => {
+                  if (link.menuItems) {
+                    handleDrawerDropdownToggle(link.text);
+                  } else {
+                    setSelectedNav(link.text);
+                    setDrawerOpen(false);
+                  }
                 }}
-              />
-            </ListItemButton>
-          </ListItem>
+              >
+                <ListItemText
+                  primary={link.text}
+                  primaryTypographyProps={{
+                    fontWeight: selectedNav === link.text ? "bold" : "normal",
+                    color:
+                      selectedNav === link.text ? "primary.main" : "inherit",
+                  }}
+                />
+                {link.menuItems &&
+                  (drawerDropdown[link.text] ? <ExpandLess /> : <ExpandMore />)}
+              </ListItemButton>
+            </ListItem>
+
+            {link.menuItems && (
+              <Collapse
+                in={drawerDropdown[link.text]}
+                timeout="auto"
+                unmountOnExit
+              >
+                <List component="div" disablePadding>
+                  {link.menuItems.map((item) => (
+                    <ListItem key={item} disablePadding>
+                      <ListItemButton
+                        sx={{ pl: 4 }}
+                        onClick={() => {
+                          setSelectedNav(link.text);
+                          setDrawerOpen(false);
+                        }}
+                      >
+                        <ListItemText primary={item} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Collapse>
+            )}
+          </Box>
         ))}
       </List>
     </Box>
@@ -107,15 +155,15 @@ const Header = () => {
         sx={{ borderBottom: "1px solid #e0e0e0", backgroundColor: "#fff" }}
       >
         <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ py: 1 }}>
+          <Toolbar disableGutters sx={{ py: 1, flexWrap: "wrap" }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <img src={logo} alt="ecozaar logo" style={{ height: 40 }} />
               <Paper
                 variant="outlined"
                 sx={{
-                  px: 4,
+                  px: 2,
                   py: 0.5,
-                  display: "flex",
+                  display: { xs: "none", sm: "flex" },
                   alignItems: "center",
                   borderRadius: "12px",
                   gap: 1,
@@ -139,17 +187,21 @@ const Header = () => {
                 </Box>
               </Paper>
             </Box>
+
             <Box
-              sx={{ flexGrow: 1, mx: 3, display: { xs: "none", md: "flex" } }}
+              sx={{
+                flexGrow: 1,
+                mx: 2,
+                mt: { xs: 2, md: 0 },
+                display: { xs: "none", md: "flex" },
+              }}
             >
               <TextField
                 variant="outlined"
                 size="small"
                 placeholder="Search Product, type or brand"
+                fullWidth
                 sx={{
-                  ml: "auto",
-                  flex: 1,
-                  maxWidth: 400,
                   backgroundColor: "#f5f5f5",
                   borderRadius: "8px",
                   "& .MuiOutlinedInput-notchedOutline": {
@@ -165,7 +217,8 @@ const Header = () => {
                 }}
               />
             </Box>
-            <Box sx={{ display: "flex", gap: 1 }}>
+
+            <Box sx={{ display: "flex", gap: 1, ml: "auto" }}>
               {[
                 FavoriteBorderOutlinedIcon,
                 ShoppingCartOutlinedIcon,
@@ -184,9 +237,17 @@ const Header = () => {
                   <Icon fontSize="small" />
                 </IconButton>
               ))}
+              <IconButton
+                sx={{ display: { xs: "flex", md: "none" } }}
+                onClick={toggleDrawer(true)}
+              >
+                <MenuIcon />
+              </IconButton>
             </Box>
           </Toolbar>
+
           <Divider />
+
           <Toolbar disableGutters>
             <Box
               sx={{
@@ -254,18 +315,10 @@ const Header = () => {
                 </Box>
               ))}
             </Box>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="end"
-              onClick={toggleDrawer(true)}
-              sx={{ display: { xs: "flex", md: "none" }, ml: "auto" }}
-            >
-              <MenuIcon />
-            </IconButton>
           </Toolbar>
         </Container>
       </AppBar>
+
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
         {drawerList}
       </Drawer>

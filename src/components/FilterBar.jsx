@@ -22,15 +22,17 @@ const FilterBar = () => {
     <Container maxWidth="md" sx={{ mt: -5, position: "relative", zIndex: 3 }}>
       <Paper elevation={3} sx={{ p: 2 }}>
         <Grid container spacing={2} alignItems="center" justifyContent="center">
-          <Grid item xs={12} sm="auto">
+          <Grid item xs={12} sm={12} md="auto">
             <Box
               sx={{
                 display: "flex",
+                flexDirection: { xs: "column", sm: "row" }, // responsive layout
                 border: "2px solid #4CAF50",
                 borderRadius: "32px",
                 backgroundColor: "#e6f5e9",
                 overflow: "hidden",
                 width: "fit-content",
+                mx: "auto", // center on small screens
               }}
             >
               <Button
@@ -42,8 +44,12 @@ const FilterBar = () => {
                   color: filter === "ev" ? "#4CAF50" : "#2E2E2E",
                   fontWeight: "bold",
                   textTransform: "none",
-                  borderRadius: filter === "ev" ? "32px 0 0 32px" : 0,
+                  borderRadius: {
+                    xs: filter === "ev" ? "32px 32px 0 0" : 0,
+                    sm: filter === "ev" ? "32px 0 0 32px" : 0,
+                  },
                   transition: "all 0.3s ease",
+                  width: { xs: "100%", sm: "auto" },
                 }}
               >
                 EV Scooter
@@ -54,11 +60,15 @@ const FilterBar = () => {
                   px: 3,
                   py: 1,
                   backgroundColor: filter === "solar" ? "white" : "transparent",
-                  color: filter === "solar" ? "#2E2E2E" : "#2E2E2E",
+                  color: filter === "solar" ? "#4CAF50" : "#2E2E2E",
                   fontWeight: "bold",
                   textTransform: "none",
-                  borderRadius: filter === "solar" ? "0 32px 32px 0" : 0,
+                  borderRadius: {
+                    xs: filter === "solar" ? "0 0 32px 32px" : 0,
+                    sm: filter === "solar" ? "0 32px 32px 0" : 0,
+                  },
                   transition: "all 0.3s ease",
+                  width: { xs: "100%", sm: "auto" },
                 }}
               >
                 Rooftop Solar

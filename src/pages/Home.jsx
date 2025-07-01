@@ -46,14 +46,30 @@ const Home = () => {
       <main>
         <Banner />
         <FilterBar />
-        <Box sx={{ py: 6, backgroundColor: "background.default" }}>
+
+        <Box
+          sx={{ py: { xs: 4, md: 6 }, backgroundColor: "background.default" }}
+        >
           <Container maxWidth="lg">
-            <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              sx={{ mb: { xs: 3, md: 4 }, fontWeight: 600 }}
+            >
               Eco-Smart Finds to Power Your Green Journey
             </Typography>
             <Grid container spacing={4} justifyContent="center">
               {featureCardData.map((card, index) => (
-                <Grid item key={index}>
+                <Grid
+                  item
+                  key={index}
+                  xs={12}
+                  sm={10}
+                  md={6}
+                  lg={5}
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
                   <FeatureCard {...card} />
                 </Grid>
               ))}
@@ -61,12 +77,16 @@ const Home = () => {
           </Container>
         </Box>
 
-        <Box sx={{ py: 6, textAlign: "center" }}>
+        <Box sx={{ py: { xs: 4, md: 6 }, textAlign: "center" }}>
           <Container maxWidth="md">
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
               Electrify your life
             </Typography>
-            <Typography variant="h6" color="text.secondary">
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              sx={{ px: { xs: 2, sm: 4 } }}
+            >
               Subscribe or Buy, the choice is yours, ALWAYS!
             </Typography>
           </Container>
