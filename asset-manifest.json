@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/MT_ecozaar/static/css/main.e6c13ad2.css",
-    "main.js": "/MT_ecozaar/static/js/main.edbd9150.js",
+    "main.js": "/MT_ecozaar/static/js/main.0043d373.js",
     "static/js/453.df7010db.chunk.js": "/MT_ecozaar/static/js/453.df7010db.chunk.js",
     "static/media/city-road.jpg": "/MT_ecozaar/static/media/city-road.0f39ecbdbb7550a2a199.jpg",
     "static/media/ather-scooter.png": "/MT_ecozaar/static/media/ather-scooter.84281041185886ae50d8.png",
@@ -10,11 +10,11 @@
     "static/media/logo.png": "/MT_ecozaar/static/media/logo.5272d5e4de70d0b9da5f.png",
     "index.html": "/MT_ecozaar/index.html",
     "main.e6c13ad2.css.map": "/MT_ecozaar/static/css/main.e6c13ad2.css.map",
-    "main.edbd9150.js.map": "/MT_ecozaar/static/js/main.edbd9150.js.map",
+    "main.0043d373.js.map": "/MT_ecozaar/static/js/main.0043d373.js.map",
     "453.df7010db.chunk.js.map": "/MT_ecozaar/static/js/453.df7010db.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.edbd9150.js"
+    "static/js/main.0043d373.js"
   ]
 }
